@@ -41,6 +41,7 @@ class HospitalRoute {
             '/salary/:id',
             this.hospitalcontroller.getsalary
         )
+        ///
 
     }
 }
