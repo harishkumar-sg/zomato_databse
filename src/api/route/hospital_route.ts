@@ -42,6 +42,7 @@ class HospitalRoute {
             this.hospitalcontroller.getsalary
         )
         ///
+        //harish
 
     }
 }
