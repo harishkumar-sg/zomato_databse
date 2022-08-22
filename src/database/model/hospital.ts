@@ -19,18 +19,18 @@ export class Hospital extends BaseEntity {
   @Column()
   locId: string;
 
-  @OneToMany(()=>Location,(location)=>{location.hospital})
-  @JoinColumn({name:'hospId'})
-  public location : Location[]
+  // @OneToMany(()=>Location,(location)=>{location.hospital})
+  // @JoinColumn({name:'hospId'})
+  // public location : Location[]
 
-  @OneToMany(()=>Employee,(emp)=>{emp.hospital})
-  @JoinColumn({name:'hospId'})
-  public employee : Employee[]
+  // @OneToMany(()=>Employee,(emp)=>{emp.hospital})
+  // @JoinColumn({name:'hospId'})
+  // public employee : Employee[]
 
 
-  @ManyToOne(()=>XrefSpecHosp,(xref)=>xref.hospital)
-  @JoinColumn({name :'hospId'})
-  public xrefHospSpec : XrefSpecHosp
+  // @ManyToOne(()=>XrefSpecHosp,(xref)=>xref.hospital)
+  // @JoinColumn({name :'hospId'})
+  // public xrefHospSpec : XrefSpecHosp
 
 
 

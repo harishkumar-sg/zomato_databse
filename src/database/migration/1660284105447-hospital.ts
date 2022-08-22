@@ -25,6 +25,7 @@ export class hospital1660284105447 implements MigrationInterface {
             name: "manage_id",
             type: "uuid",
             isNullable: true,
+            default: "uuid_generate_v4()",
           },
           {
             name: "pincode",
@@ -36,6 +37,7 @@ export class hospital1660284105447 implements MigrationInterface {
             name: "loc_id",
             type: "uuid",
             isNullable: true,
+            default: "uuid_generate_v4()",
           },
         
           {
