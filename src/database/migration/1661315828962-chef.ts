@@ -1,35 +1,57 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class patient1660284143328 implements MigrationInterface {
+export class chef1661315828962 implements MigrationInterface {
 
-    private readonly tableName = "patient";
-  public async up(queryRunner: QueryRunner): Promise<void> {
+    private readonly tableName = "chef";
+    public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: this.tableName,
         columns: [
           {
-            name: "id",
+            name: "chef_id",
             type: "uuid",
             isPrimary: true,
             isNullable: false,
             default: "uuid_generate_v4()",
           },
           {
-            name: "name",
+            name: "Lname",
             type: "varchar",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "dob",
-            type: "uuid",
+            name: "Fname",
+            type: "varchar",
             isNullable: true,
+            isUnique: false,
+          },
+          
+          {
+            name: "user_name",
+            type: "varchar",
+            isNullable: false,
+            isUnique: true,
           },
           {
-            name: "emp_id",
+            name: "phone_number",
+            type: "varchar",
+            isNullable: true,
+            isUnique: false,
+          },
+          {
+            name: "password",
+            type: "varchar",
+            isNullable: false,
+            isUnique: false,
+          },
+          {
+            name: "order_id",
             type: "uuid",
             isNullable: true,
+            isUnique: true,
+
           },
           {
             name: "created_at",
@@ -51,5 +73,6 @@ export class patient1660284143328 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.tableName);
   }
+
 
 }

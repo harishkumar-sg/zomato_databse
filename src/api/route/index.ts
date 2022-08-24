@@ -1,9 +1,9 @@
 import { Application } from "express";
 import { AuthenticateRequest } from "@middleware/authenticate-request";
-import EmployeeRoute  from './employee.route';
+//import EmployeeRoute  from './employee.route';
 import BaseRoute from "./base.route";
 import CmsRoute from "./cms.route";
-import hospitalRoute from "./hospital.route";
+//import hospitalRoute from "./hospital.route";
 export class Routes {
   private authenticate;
   constructor() {
@@ -14,8 +14,8 @@ export class Routes {
     // resource and routes mapping comes here
     app.use("/cms", CmsRoute);
     app.use('/',BaseRoute);
-    app.use('/employee',EmployeeRoute)
-    app.use('/hospital',hospitalRoute)
+    // app.use('/employee',EmployeeRoute)
+    // app.use('/hospital',hospitalRoute)
 
   }
 }

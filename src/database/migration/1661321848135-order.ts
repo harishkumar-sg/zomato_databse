@@ -1,45 +1,43 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class hospital1660284105447 implements MigrationInterface {
+export class order1661321848135 implements MigrationInterface {
 
-    private readonly tableName = 'hospital';
-  public async up(queryRunner: QueryRunner): Promise<void> {
+    private readonly tableName = "order";
+    public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: this.tableName,
         columns: [
           {
-            name: "id",
+            name: "order_id",
             type: "uuid",
             isPrimary: true,
             isNullable: false,
             default: "uuid_generate_v4()",
           },
           {
-            name: "name",
+            name: "order_date",
             type: "varchar",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "manage_id",
+            name: "customer_id",
             type: "uuid",
             isNullable: true,
-            default: "uuid_generate_v4()",
+            isUnique:true
           },
           {
-            name: "pincode",
+            name: "quantity",
             type: "varchar",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "loc_id",
+            name: "pickup_id",
             type: "uuid",
             isNullable: true,
-            default: "uuid_generate_v4()",
           },
-        
           {
             name: "created_at",
             type: "timestamptz",
@@ -53,14 +51,26 @@ export class hospital1660284105447 implements MigrationInterface {
             default: "now()",
           },
         ],
-        // foreignKeys: [
-        //     new TableForeignKey({
-        //       name: 'FK_location_id',
-        //       referencedTableName: 'location',
-        //       columnNames: ['loc_id'],
-        //       referencedColumnNames: ['loc_id'],
-        //     })
-        // ]
+        foreignKeys: [
+          new TableForeignKey({
+            name: 'FK_order_payment',
+            referencedTableName: 'payment',
+            columnNames: ['order_id'],
+            referencedColumnNames: ['order_id'],
+          }),
+          new TableForeignKey({
+            name :'FK_order_chef',
+            referencedTableName:'chef',
+            columnNames:['order_id'],
+            referencedColumnNames:['order_id']
+          }),
+          new TableForeignKey({
+            name :'FK_order_order_item',
+            referencedTableName:'order_item',
+            columnNames:['order_id'],
+            referencedColumnNames:['order_id']
+          })
+        ],
       })
     );
   }
@@ -68,6 +78,5 @@ export class hospital1660284105447 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.tableName);
   }
-
 
 }
