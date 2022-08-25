@@ -1,8 +1,8 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class order1661321848135 implements MigrationInterface {
+export class orderItem1661418826506 implements MigrationInterface {
 
-    private readonly tableName = "order";
+    private readonly tableName = "order_item";
     public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -16,13 +16,7 @@ export class order1661321848135 implements MigrationInterface {
             default: "uuid_generate_v4()",
           },
           {
-            name: "order_date",
-            type: "varchar",
-            isNullable: true,
-            isUnique: false,
-          },
-          {
-            name: "customer_id",
+            name: "food_id",
             type: "uuid",
             isNullable: true,
             isUnique:true
@@ -34,9 +28,10 @@ export class order1661321848135 implements MigrationInterface {
             isUnique: false,
           },
           {
-            name: "pickup_id",
-            type: "uuid",
+            name: "unit_price",
+            type: "varchar",
             isNullable: true,
+            isUnique: false,
           },
           {
             name: "created_at",
@@ -52,25 +47,22 @@ export class order1661321848135 implements MigrationInterface {
           },
         ],
         foreignKeys: [
+          
           new TableForeignKey({
-            name: 'FK_order_payment',
-            referencedTableName: 'payment',
-            columnNames: ['order_id'],
-            referencedColumnNames: ['order_id'],
+            name :'FK_order_item_food_item',
+            referencedTableName:'food_item',
+            columnNames:['food_id'],
+            referencedColumnNames:['food_id']
           }),
           new TableForeignKey({
-            name :'FK_order_chef',
-            referencedTableName:'chef',
-            columnNames:['order_id'],
-            referencedColumnNames:['order_id']
-          }),
-          new TableForeignKey({
-            name :'FK_order_order_item',
-            referencedTableName:'order_item',
+            name :'FK_order_item_order',
+            referencedTableName:'order',
             columnNames:['order_id'],
             referencedColumnNames:['order_id']
           })
+         
         ],
+        
       })
     );
   }

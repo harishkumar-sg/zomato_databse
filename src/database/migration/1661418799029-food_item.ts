@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class foodItem1661321810253 implements MigrationInterface {
+export class foodItem1661418799029 implements MigrationInterface {
 
     private readonly tableName = "food_item";
     public async up(queryRunner: QueryRunner): Promise<void> {

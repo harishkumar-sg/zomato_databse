@@ -1,53 +1,57 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class customer1661321874980 implements MigrationInterface {
+export class chef1661418772471 implements MigrationInterface {
 
-    private readonly tableName = "customer";
+    private readonly tableName = "chef";
     public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: this.tableName,
         columns: [
           {
-            name: "customer_id",
+            name: "chef_id",
             type: "uuid",
             isPrimary: true,
             isNullable: false,
             default: "uuid_generate_v4()",
           },
           {
-            name: "email",
+            name: "l_name",
             type: "varchar",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "phone",
+            name: "f_name",
+            type: "varchar",
+            isNullable: true,
+            isUnique: false,
+          },
+          
+          {
+            name: "user_name",
+            type: "varchar",
+            isNullable: false,
+            isUnique: true,
+          },
+          {
+            name: "phone_nor",
             type: "varchar",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "Fname",
+            name: "password",
             type: "varchar",
-            isNullable: true,
+            isNullable: false,
             isUnique: false,
           },
           {
-            name: "Lname",
-            type: "varchar",
-            isNullable: true,
-            isUnique: false,
-          },
-          {
-            name: "payment_id",
+            name: "order_id",
             type: "uuid",
             isNullable: true,
-          },
-          {
-            name: "food_id",
-            type: "uuid",
-            isNullable: true,
+            isUnique: true,
+
           },
           {
             name: "created_at",
@@ -63,13 +67,13 @@ export class customer1661321874980 implements MigrationInterface {
           },
         ],
         foreignKeys: [
+          
           new TableForeignKey({
-            name: 'FK_customer_order',
-            referencedTableName: 'order',
-            columnNames: ['customer_id'],
-            referencedColumnNames: ['customer_id'],
-          }),
-
+            name :'FK_chef_order',
+            referencedTableName:'order',
+            columnNames:['order_id'],
+            referencedColumnNames:['order_id']
+          })
          
         ],
       })

@@ -1,56 +1,42 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class administrator1661257091383 implements MigrationInterface {
+export class menu1661418814484 implements MigrationInterface {
 
-    private readonly tableName = "administrator";
+    private readonly tableName = "menu";
     public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: this.tableName,
         columns: [
           {
-            name: "admin_id",
+            name: "menu_id",
             type: "uuid",
             isPrimary: true,
             isNullable: false,
             default: "uuid_generate_v4()",
           },
           {
-            name: "Fname",
+            name: "price",
             type: "varchar",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "Lname",
+            name: "start_date",
             type: "varchar",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "user_name",
-            type: "varchar",
-            isNullable: false,
-            isUnique: true,
-          },
-          {
-            name: "password",
-            type: "varchar",
-            isNullable: false,
-            isUnique: false,
-          },
-          {
-            name: "status",
+            name: "end_date",
             type: "varchar",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "menu_id",
+            name: "food_id",
             type: "uuid",
-            isNullable: true, 
-            isUnique: true,
-
+            isNullable: true,
           },
           {
             name: "created_at",
@@ -65,6 +51,17 @@ export class administrator1661257091383 implements MigrationInterface {
             default: "now()",
           },
         ],
+        foreignKeys: [
+          
+          new TableForeignKey({
+            name :'FK_menu_food_item',
+            referencedTableName:'food_item',
+            columnNames:['food_id'],
+            referencedColumnNames:['food_id']
+          })
+         
+        ],
+        
       })
     );
   }

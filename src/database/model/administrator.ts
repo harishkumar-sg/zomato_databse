@@ -7,10 +7,10 @@ export class Administrator extends BaseEntity {
   adminId: string;
 
   @Column()
-  FName: string;
+  fName: string;
   
   @Column()
-  LName: string;
+  lName: string;
 
 
   @Column()

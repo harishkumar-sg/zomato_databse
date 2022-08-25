@@ -7,10 +7,10 @@ export class Chef extends BaseEntity {
   chefId: string;
 
   @Column()
-  LName: string;
+  lName: string;
   
   @Column()
-  FName: string;
+  fName: string;
 
   @Column()
   userName: string;

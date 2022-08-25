@@ -1,8 +1,8 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class orderItem1661321825824 implements MigrationInterface {
+export class order1661418754162 implements MigrationInterface {
 
-    private readonly tableName = "order_item";
+    private readonly tableName = "order";
     public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -16,7 +16,13 @@ export class orderItem1661321825824 implements MigrationInterface {
             default: "uuid_generate_v4()",
           },
           {
-            name: "food_id",
+            name: "order_date",
+            type: "varchar",
+            isNullable: true,
+            isUnique: false,
+          },
+          {
+            name: "customer_id",
             type: "uuid",
             isNullable: true,
             isUnique:true
@@ -28,10 +34,9 @@ export class orderItem1661321825824 implements MigrationInterface {
             isUnique: false,
           },
           {
-            name: "unit_price",
-            type: "varchar",
+            name: "pickup_id",
+            type: "uuid",
             isNullable: true,
-            isUnique: false,
           },
           {
             name: "created_at",
@@ -47,15 +52,16 @@ export class orderItem1661321825824 implements MigrationInterface {
           },
         ],
         foreignKeys: [
-          new TableForeignKey({
-            name: 'FK_order_iten_food_item',
-            referencedTableName: 'food_item',
-            columnNames: ['food_id'],
-            referencedColumnNames: ['food_id'],
-          }),
-
           
+          new TableForeignKey({
+            name :'FK_order_customer',
+            referencedTableName:'order',
+            columnNames:['customer_id'],
+            referencedColumnNames:['customer_id']
+          })
+         
         ],
+        
       })
     );
   }
@@ -63,4 +69,5 @@ export class orderItem1661321825824 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.tableName);
   }
+
 }

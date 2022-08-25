@@ -13,10 +13,10 @@ export class Customer extends BaseEntity {
   phoneNo: string ;
 
   @Column()
-  FName: string;
+  fName: string;
 
   @Column()
-  LName: string;
+  lName: string;
   
   @Column()
   paymentId: string;

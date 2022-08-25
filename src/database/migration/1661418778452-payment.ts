@@ -1,6 +1,6 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class payment1661315819883 implements MigrationInterface {
+export class payment1661418778452 implements MigrationInterface {
 
     private readonly tableName = "payment";
     public async up(queryRunner: QueryRunner): Promise<void> {
@@ -58,6 +58,16 @@ export class payment1661315819883 implements MigrationInterface {
             default: "now()",
           },
         ],
+        foreignKeys: [
+          
+          new TableForeignKey({
+            name :'FK_payment_order',
+            referencedTableName:'order',
+            columnNames:['order_id'],
+            referencedColumnNames:['order_id']
+          })
+         
+        ],
       })
     );
   }
@@ -65,5 +75,6 @@ export class payment1661315819883 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.tableName);
   }
+
 
 }
