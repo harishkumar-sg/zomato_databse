@@ -32,7 +32,6 @@ class CustomerRoute {
             this.httprequestvalidator.validate('params',idValidator),
             this.customerController.updateCustomer
         )
-        //till this everything is ok
         this.router.delete(
             '/:id',
             this.httprequestvalidator.validate('params',idValidator),
