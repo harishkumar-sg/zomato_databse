@@ -1,14 +1,14 @@
 import { Customer } from "@database/model/customer";
 import { CustomerService } from "@service/customer.service";
 import {Request,Response} from "express"
+import { getManager } from "typeorm";
 
 export class CustomerController {
     private customerService : CustomerService;
-    
     constructor(){
         this.customerService = new CustomerService()
     }
-    public createCustomer= async (req: Request, res: Response):Promise<void>=>{ 
+    public createCustomer= async (req: Request, res: Response):Promise<any>=>{
         const customer = new Customer()
         customer.email=(String)(req.query.email)
         customer.fName=(String)(req.query.fname)
