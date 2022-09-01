@@ -1,48 +1,43 @@
-import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany, ManyToOne } from "typeorm";
-import { Chef } from "./chef";
-import { Customer } from "./customer";
-import { OrderItem } from "./order-item";
-import { Payment } from "./payment";
+import {
+  Entity,
+  Column,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  OneToMany,
+  JoinColumn,
+  ManyToOne,
+} from "typeorm";
+import { DeliveryGuy } from "./delivery.guy";
+import { OrderList } from "./orderlist";
+import { Users } from "./users";
 
-@Entity('order')
+
+@Entity("order")
 export class Order extends BaseEntity {
   @PrimaryGeneratedColumn()
   orderId: string;
 
   @Column()
-  orderDate: string;
-  
-  @Column()
-  customerId: string;
+  userId: string;
 
   @Column()
-  quantity: string;
-  
+  ratings: string;
+
   @Column()
-  pickupID: string ;
+  bill: string;
 
-  @OneToOne(()=>Chef,(chef)=>chef.order)
-  @JoinColumn({name:'orderId',referencedColumnName:'orderId'})
-  public chef:Chef
+  @Column()
+  deliveryGuyId: string;
 
-  @OneToOne(()=>OrderItem,(item)=>item.order)
-  @JoinColumn({name:'orderId',referencedColumnName:'orderId'})
-  public orderitem:OrderItem
+  @ManyToOne(() => Users, (users) => users.order)
+  public users: Users;
 
-  @OneToMany(()=>Payment,(payment)=>payment.order)
-  @JoinColumn({name :'orderId' })
-  public payment : Payment[]
+  @OneToOne(() => DeliveryGuy, (deliveryguy) => deliveryguy.order)
+  @JoinColumn({ name: "orderId", referencedColumnName: "orderId" })
+  public deliveryguy: DeliveryGuy;
 
-  @ManyToOne(()=>Customer,(customer)=>customer.order)
-  public customer : Customer
-  
-
-
-  
-
-  
-
-  
-
-
+  @OneToMany(() => OrderList, (orderlist) => orderlist.order)
+  @JoinColumn({ name: "orderId" })
+  public orderlist: OrderList[];
 }

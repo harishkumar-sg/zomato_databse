@@ -1,57 +1,44 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class administrator1661418841988 implements MigrationInterface {
-
-    private readonly tableName = "administrator";
-    public async up(queryRunner: QueryRunner): Promise<void> {
+export class order1661841169386 implements MigrationInterface {
+  private readonly tableName = "order";
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: this.tableName,
         columns: [
           {
-            name: "admin_id",
+            name: "order_id",
             type: "uuid",
             isPrimary: true,
             isNullable: false,
             default: "uuid_generate_v4()",
           },
           {
-            name: "f_name",
-            type: "varchar",
-            isNullable: true,
-            isUnique: false,
-          },
-          {
-            name: "l_name",
-            type: "varchar",
-            isNullable: true,
-            isUnique: false,
-          },
-          {
-            name: "user_name",
-            type: "varchar",
-            isNullable: false,
-            isUnique: true,
-          },
-          {
-            name: "password",
-            type: "varchar",
-            isNullable: false,
-            isUnique: false,
-          },
-          {
-            name: "status",
-            type: "varchar",
-            isNullable: true,
-            isUnique: false,
-          },
-          {
-            name: "menu_id",
+            name: "user_id",
             type: "uuid",
-            isNullable: true, 
-            isUnique: true,
-
+            isNullable: true,
+            isUnique: false,
           },
+          {
+            name: "ratings",
+            type: "varchar",
+            isNullable: true,
+            isUnique: false,
+          },
+          {
+            name: "bill",
+            type: "varchar",
+            isNullable: true,
+            isUnique: false,
+          },
+          {
+            name: "delivery_guy_id",
+            type: "uuid",
+            isNullable: true,
+            isUnique: false,
+          },
+
           {
             name: "created_at",
             type: "timestamptz",
@@ -66,16 +53,13 @@ export class administrator1661418841988 implements MigrationInterface {
           },
         ],
         foreignKeys: [
-          
           new TableForeignKey({
-            name :'FK_admin_menu',
-            referencedTableName:'menu',
-            columnNames:['menu_id'],
-            referencedColumnNames:['menu_id']
-          })
-         
+            name: "FK_order_user",
+            referencedTableName: "users",
+            columnNames: ["user_id"],
+            referencedColumnNames: ["user_id"],
+          }),
         ],
-        
       })
     );
   }
@@ -83,5 +67,4 @@ export class administrator1661418841988 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.tableName);
   }
-
 }

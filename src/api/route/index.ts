@@ -3,7 +3,8 @@ import { AuthenticateRequest } from "@middleware/authenticate-request";
 //import EmployeeRoute  from './employee.route';
 import BaseRoute from "./base.route";
 import CmsRoute from "./cms.route";
-import CustomerRoute from "./customer.route";
+import ZomatoRoute from "./zomato.route"
+
 //import hospitalRoute from "./hospital.route";
 export class Routes {
   private authenticate;
@@ -14,8 +15,9 @@ export class Routes {
   public routes(app: Application): void {
     // resource and routes mapping comes here
     app.use("/cms", CmsRoute);
-    app.use('/',BaseRoute);
-    app.use('/customer',CustomerRoute)
+    app.use('/', BaseRoute);
+    app.use("/zomato", ZomatoRoute);
+    //app.use('/customer',CustomerRoute)
     // app.use('/employee',EmployeeRoute)
     // app.use('/hospital',hospitalRoute)
 

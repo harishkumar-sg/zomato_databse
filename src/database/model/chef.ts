@@ -1,43 +1,32 @@
-import { Entity, Column, BaseEntity, PrimaryGeneratedColumn, OneToOne } from "typeorm";
-import { Order } from "./order";
+import {
+  Entity,
+  Column,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  OneToMany,
+  JoinColumn,
+} from "typeorm";
+import { Items } from "./items";
+import { OrderList } from "./orderlist";
+import { Restaurant } from "./restaurant";
 
-@Entity('chef')
+
+@Entity("chef")
 export class Chef extends BaseEntity {
   @PrimaryGeneratedColumn()
   chefId: string;
 
   @Column()
-  lName: string;
-  
-  @Column()
-  fName: string;
+  name: string;
 
   @Column()
-  userName: string;
-  
-  @Column()
-  phoneNo: string ;
+  restaurantId: string;
 
-  @Column()
-  password: string;
+  @OneToOne(() => Restaurant, (restaurant) => restaurant.chef)
+  public restaurant: Restaurant;
 
-  @Column()
-  orderId: string;
-
-
-
-  @OneToOne(()=>Order,(order)=>order.chef)
-  public order : Order
-
-
-
-
-
-  
-
-  
-
-  
-
-
+  @OneToMany(() => OrderList, (orderlist) => orderlist.chef)
+  @JoinColumn({ name: "chef_id" })
+  public orderlist: OrderList[];
 }

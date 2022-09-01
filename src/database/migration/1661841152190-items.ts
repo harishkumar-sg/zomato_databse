@@ -1,46 +1,33 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class payment1661418778452 implements MigrationInterface {
-
-    private readonly tableName = "payment";
-    public async up(queryRunner: QueryRunner): Promise<void> {
+export class items1661841152190 implements MigrationInterface {
+  private readonly tableName = "items";
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: this.tableName,
         columns: [
           {
-            name: "payment_id",
+            name: "item_id",
             type: "uuid",
             isPrimary: true,
             isNullable: false,
             default: "uuid_generate_v4()",
           },
           {
-            name: "customer_id",
+            name: "restaurant_id",
             type: "uuid",
             isNullable: true,
+            isUnique: false,
           },
           {
-            name: "order_id",
-            type: "uuid",
-            isNullable: true,
-            isUnique: true
-           
-          },
-          {
-            name: "payment_date",
+            name: "name",
             type: "varchar",
             isNullable: true,
             isUnique: false,
-           
           },
           {
-            name: "amount",
-            type: "varchar",
-            isNullable: true,
-            isUnique: false,
-          },{
-            name: "payment_type",
+            name: "price",
             type: "varchar",
             isNullable: true,
             isUnique: false,
@@ -59,14 +46,12 @@ export class payment1661418778452 implements MigrationInterface {
           },
         ],
         foreignKeys: [
-          
           new TableForeignKey({
-            name :'FK_payment_order',
-            referencedTableName:'order',
-            columnNames:['order_id'],
-            referencedColumnNames:['order_id']
-          })
-         
+            name: "FK_items_restaurant",
+            referencedTableName: "restaurant",
+            columnNames: ["restaurant_id"],
+            referencedColumnNames: ["restaurant_id"],
+          }),
         ],
       })
     );
@@ -75,6 +60,4 @@ export class payment1661418778452 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.tableName);
   }
-
-
 }

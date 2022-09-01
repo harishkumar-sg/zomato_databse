@@ -1,35 +1,34 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class orderItem1661418826506 implements MigrationInterface {
-
-    private readonly tableName = "order_item";
-    public async up(queryRunner: QueryRunner): Promise<void> {
+export class orderList1661841182020 implements MigrationInterface {
+  private readonly tableName = "order_list";
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: this.tableName,
         columns: [
           {
-            name: "order_id",
+            name: "order_list_id",
             type: "uuid",
             isPrimary: true,
             isNullable: false,
             default: "uuid_generate_v4()",
           },
           {
-            name: "food_id",
+            name: "order_id",
             type: "uuid",
-            isNullable: true,
-            isUnique:true
-          },
-          {
-            name: "quantity",
-            type: "varchar",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "unit_price",
-            type: "varchar",
+            name: "item_id",
+            type: "uuid",
+            isNullable: true,
+            isUnique: false,
+          },
+          {
+            name: "chef_id",
+            type: "uuid",
             isNullable: true,
             isUnique: false,
           },
@@ -47,22 +46,25 @@ export class orderItem1661418826506 implements MigrationInterface {
           },
         ],
         foreignKeys: [
-          
           new TableForeignKey({
-            name :'FK_order_item_food_item',
-            referencedTableName:'food_item',
-            columnNames:['food_id'],
-            referencedColumnNames:['food_id']
+            name: "FK_orderlist_items",
+            referencedTableName: "items",
+            columnNames: ["item_id"],
+            referencedColumnNames: ["item_id"],
           }),
           new TableForeignKey({
-            name :'FK_order_item_order',
-            referencedTableName:'order',
-            columnNames:['order_id'],
-            referencedColumnNames:['order_id']
-          })
-         
+            name: "FK_chef_items",
+            referencedTableName: "chef",
+            columnNames: ["chef_id"],
+            referencedColumnNames: ["chef_id"],
+          }),
+          new TableForeignKey({
+            name: "FK_order_items",
+            referencedTableName: "order",
+            columnNames: ["order_id"],
+            referencedColumnNames: ["order_id"],
+          }),
         ],
-        
       })
     );
   }
@@ -70,5 +72,4 @@ export class orderItem1661418826506 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.tableName);
   }
-
 }

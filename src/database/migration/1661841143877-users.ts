@@ -1,15 +1,14 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class foodItem1661418799029 implements MigrationInterface {
-
-    private readonly tableName = "food_item";
-    public async up(queryRunner: QueryRunner): Promise<void> {
+export class users1661841143877 implements MigrationInterface {
+  private readonly tableName = "users";
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: this.tableName,
         columns: [
           {
-            name: "food_id",
+            name: "user_id",
             type: "uuid",
             isPrimary: true,
             isNullable: false,
@@ -22,19 +21,19 @@ export class foodItem1661418799029 implements MigrationInterface {
             isUnique: false,
           },
           {
-            name: "quantity",
+            name: "password",
             type: "varchar",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "unit_price",
+            name: "phone",
             type: "varchar",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "item_category",
+            name: "address",
             type: "varchar",
             isNullable: true,
             isUnique: false,
@@ -59,5 +58,4 @@ export class foodItem1661418799029 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.tableName);
   }
-
 }

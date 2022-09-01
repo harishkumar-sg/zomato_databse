@@ -1,42 +1,30 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class menu1661418814484 implements MigrationInterface {
-
-    private readonly tableName = "menu";
-    public async up(queryRunner: QueryRunner): Promise<void> {
+export class deliveryGuy1661841200605 implements MigrationInterface {
+  private readonly tableName = "delivery_guy";
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: this.tableName,
         columns: [
           {
-            name: "menu_id",
+            name: "delivery_guy_id",
             type: "uuid",
             isPrimary: true,
             isNullable: false,
             default: "uuid_generate_v4()",
           },
           {
-            name: "price",
-            type: "varchar",
-            isNullable: true,
-            isUnique: false,
-          },
-          {
-            name: "start_date",
-            type: "varchar",
-            isNullable: true,
-            isUnique: false,
-          },
-          {
-            name: "end_date",
-            type: "varchar",
-            isNullable: true,
-            isUnique: false,
-          },
-          {
-            name: "food_id",
+            name: "order_id",
             type: "uuid",
             isNullable: true,
+            isUnique: false,
+          },
+          {
+            name: "ratings",
+            type: "varchar",
+            isNullable: true,
+            isUnique: false,
           },
           {
             name: "created_at",
@@ -52,16 +40,13 @@ export class menu1661418814484 implements MigrationInterface {
           },
         ],
         foreignKeys: [
-          
           new TableForeignKey({
-            name :'FK_menu_food_item',
-            referencedTableName:'food_item',
-            columnNames:['food_id'],
-            referencedColumnNames:['food_id']
-          })
-         
+            name: "FK_delivery_guy_order",
+            referencedTableName: "order",
+            columnNames: ["order_id"],
+            referencedColumnNames: ["order_id"],
+          }),
         ],
-        
       })
     );
   }
@@ -69,5 +54,4 @@ export class menu1661418814484 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.tableName);
   }
-
 }
