@@ -1,44 +1,31 @@
-import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
+import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class order1661841169386 implements MigrationInterface {
-  private readonly tableName = "order";
+export class deliveryGuy1662100736701 implements MigrationInterface {
+  private readonly tableName = "delivery_guy";
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: this.tableName,
         columns: [
           {
-            name: "order_id",
+            name: "delivery_guy_id",
             type: "uuid",
             isPrimary: true,
             isNullable: false,
             default: "uuid_generate_v4()",
           },
           {
-            name: "user_id",
-            type: "uuid",
-            isNullable: true,
-            isUnique: false,
-          },
-          {
-            name: "ratings",
+            name: "name",
             type: "varchar",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "bill",
+            name: "status",
             type: "varchar",
             isNullable: true,
             isUnique: false,
           },
-          {
-            name: "delivery_guy_id",
-            type: "uuid",
-            isNullable: true,
-            isUnique: false,
-          },
-
           {
             name: "created_at",
             type: "timestamptz",
@@ -52,18 +39,19 @@ export class order1661841169386 implements MigrationInterface {
             default: "now()",
           },
         ],
-        foreignKeys: [
-          new TableForeignKey({
-            name: "FK_order_user",
-            referencedTableName: "users",
-            columnNames: ["user_id"],
-            referencedColumnNames: ["user_id"],
-          }),
-        ],
+        // foreignKeys: [
+        //   new TableForeignKey({
+        //     name: "FK_delivery_guy_order",
+        //     referencedTableName: "order",
+        //     columnNames: ["order_id"],
+        //     referencedColumnNames: ["order_id"],
+        //   }),
+        // ],
       })
     );
   }
 
+    
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.tableName);
   }

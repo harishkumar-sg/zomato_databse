@@ -26,7 +26,7 @@ export class Chef extends BaseEntity {
   @OneToOne(() => Restaurant, (restaurant) => restaurant.chef)
   public restaurant: Restaurant;
 
-  @OneToMany(() => OrderList, (orderlist) => orderlist.chef)
-  @JoinColumn({ name: "chef_id" })
-  public orderlist: OrderList[];
+  // @OneToMany(() => OrderList, (orderlist) => orderlist.chef)
+  // @JoinColumn({ name: "chef_id" })
+  // public orderlist: OrderList[];
 }

@@ -12,6 +12,7 @@ import {
 import { Chef } from "./chef";
 import { Items } from "./items";
 import { Order } from "./order";
+import { Users } from "./users";
 
 
 @Entity("order_list")
@@ -20,7 +21,7 @@ export class OrderList extends BaseEntity {
   orderListId: string;
 
   @Column()
-  orderId: string;
+  userId: string;
 
   @Column()
   itemId: string;
@@ -28,12 +29,12 @@ export class OrderList extends BaseEntity {
   @Column()
   chefId: string;
 
-  @ManyToOne(() => Order, (order) => order.orderlist)
-  public order: Order;
+  // @ManyToOne(() => Users, (users) => users.orderlist)
+  // public users: Users;
+  
+  // @ManyToOne(() => Chef, (chef) => chef.orderlist)
+  // public chef: Chef;
 
-  @ManyToOne(() => Chef, (chef) => chef.orderlist)
-  public chef: Chef;
-
-  @ManyToOne(() => Items, (items) => items.orderlist)
-  public items: Items;
+  // @ManyToOne(() => Items, (items) => items.orderlist)
+  // public items: Items;
 }

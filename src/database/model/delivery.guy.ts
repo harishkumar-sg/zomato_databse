@@ -16,11 +16,12 @@ export class DeliveryGuy extends BaseEntity {
   deliveryGuyId: string;
 
   @Column()
-  orderId: string;
+  name: string;
 
   @Column()
-  ratings: string;
-
-  @OneToOne(() => Order, (order) => order.deliveryguy)
-  public order: Order;
+  status: string;
+  
+  // @OneToOne(() => Order, (order) => order.deliveryguy)
+  // public order: Order;
+  
 } 

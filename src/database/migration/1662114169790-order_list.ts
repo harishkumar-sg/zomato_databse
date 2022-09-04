@@ -1,28 +1,34 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class deliveryGuy1661841200605 implements MigrationInterface {
-  private readonly tableName = "delivery_guy";
+export class orderList1662114169790 implements MigrationInterface {
+  private readonly tableName = "order_list";
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: this.tableName,
         columns: [
           {
-            name: "delivery_guy_id",
+            name: "order_list_id",
             type: "uuid",
             isPrimary: true,
             isNullable: false,
             default: "uuid_generate_v4()",
           },
           {
-            name: "order_id",
+            name: "user_id",
             type: "uuid",
             isNullable: true,
             isUnique: false,
           },
           {
-            name: "ratings",
-            type: "varchar",
+            name: "item_id",
+            type: "uuid",
+            isNullable: true,
+            isUnique: false,
+          },
+          {
+            name: "chef_id",
+            type: "uuid",
             isNullable: true,
             isUnique: false,
           },
@@ -41,10 +47,22 @@ export class deliveryGuy1661841200605 implements MigrationInterface {
         ],
         foreignKeys: [
           new TableForeignKey({
-            name: "FK_delivery_guy_order",
-            referencedTableName: "order",
-            columnNames: ["order_id"],
-            referencedColumnNames: ["order_id"],
+            name: "FK_orderlist_items",
+            referencedTableName: "items",
+            columnNames: ["item_id"],
+            referencedColumnNames: ["item_id"],
+          }),
+          new TableForeignKey({
+            name: "FK_chef_items",
+            referencedTableName: "chef",
+            columnNames: ["chef_id"],
+            referencedColumnNames: ["chef_id"],
+          }),
+          new TableForeignKey({
+            name: "FK_user_items",
+            referencedTableName: "users",
+            columnNames: ["user_id"],
+            referencedColumnNames: ["user_id"],
           }),
         ],
       })

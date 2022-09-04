@@ -34,7 +34,7 @@ export class Items extends BaseEntity {
   @JoinColumn({ name: "restaurant_id", referencedColumnName: "restaurantId" })
   public restaurant: Restaurant;
 
-  @OneToMany(() => OrderList, (orderlist) => orderlist.items)
-  @JoinColumn({ name: "item_id" })
-  public orderlist: OrderList[];
+  // @OneToMany(() => OrderList, (orderlist) => orderlist.items)
+  // @JoinColumn({ name: "item_id" })
+  // public orderlist: OrderList[];
 }
